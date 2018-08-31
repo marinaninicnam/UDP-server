@@ -95,7 +95,7 @@ void handle_user_input(connection_info *connection)
     if(sendto(connection->socket, (void*)&msg, sizeof(msg), 0,((struct sockaddr *)&connection->address),sizeof(connection->address)) < 0)
     {
         perror("Echec de l\'envoi");
-        exit(1);
+        return;
     }
   }
   else if(strcmp(input, "_help") == 0)
@@ -147,7 +147,7 @@ void handle_user_input(connection_info *connection)
     if(sendto(connection->socket, (void*)&msg, sizeof(msg), 0,((struct sockaddr *)&connection->address),sizeof(connection->address)) < 0)
     {
         perror("Echec de l\'envoi");
-        exit(1);
+        return;
     }
 
   }
@@ -166,7 +166,7 @@ void handle_user_input(connection_info *connection)
     if(sendto(connection->socket, (void*)&msg, sizeof(msg), 0,((struct sockaddr *)&connection->address),sizeof(connection->address)) < 0)
     {
         perror("Echec de l\'envoi");
-        exit(1);
+        return;
     }
   }
 
@@ -248,7 +248,7 @@ int main(int argc, char *argv[])
     if(select(connection.socket+1, &file_descriptors, NULL, NULL, NULL) < 0)
     {
       perror("la sélection de la connexion a échoué.");
-      exit(1);
+      return 0;
     }
 
     if(FD_ISSET(STDIN_FILENO, &file_descriptors))
